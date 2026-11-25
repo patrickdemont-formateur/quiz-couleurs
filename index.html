@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Questionnaire pédagogique de sensibilisation aux préférences comportementales">
+<meta name="robots" content="noindex">
+<title>Profil de management par les couleurs</title>
+<link rel="stylesheet" href="css/style.css?v=3.0">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/4.2.1/jspdf.umd.min.js"></script>
+<script defer src="js/config.js?v=3.0"></script>
+<script defer src="js/core.js?v=3.0"></script>
+<script defer src="js/participant.js?v=3.0"></script>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>Profil de management par les couleurs</h1>
+  <p>36 situations pour explorer vos préférences comportementales</p>
+  <div class="notice">Outil pédagogique de sensibilisation aux préférences comportementales. Il ne constitue ni un diagnostic psychologique ni un test psychométrique validé.</div>
+</div></header>
+
+<main class="wrap">
+
+  <section id="viewLanding" class="panel view" hidden>
+    <h2>Rejoindre un groupe</h2>
+    <p>Scannez le QR code affiché par votre formateur, ou saisissez ici le code du groupe.</p>
+    <div class="field-row">
+      <input id="codeInput" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" maxlength="12" placeholder="Code du groupe" aria-label="Code du groupe">
+      <button id="codeBtn" class="primary">Continuer</button>
+    </div>
+  </section>
+
+  <section id="viewRegister" class="panel view" hidden>
+    <h2 id="groupName">Groupe</h2>
+    <div class="privacy" aria-labelledby="privTitle">
+      <h3 id="privTitle">Avant de commencer</h3>
+      <ul>
+        <li><strong>Objectif :</strong> sensibiliser aux préférences comportementales et nourrir un échange avec votre formateur. Ce n’est ni un diagnostic ni un test validé.</li>
+        <li><strong>Données collectées :</strong> votre prénom et vos réponses, rien d’autre.</li>
+        <li><strong>Qui y a accès :</strong> votre formateur, pour animer le débriefing. Vos résultats ne sont ni archivés ni communiqués à des tiers.</li>
+        <li><strong>Durée de conservation :</strong> suppression automatique 7 jours après votre inscription (purge hebdomadaire, quelques jours de marge possibles).</li>
+        <li><strong>Copies :</strong> un PDF téléchargé ou une capture d’écran vous appartient et n’est pas concerné par cette suppression.</li>
+      </ul>
+    </div>
+    <label for="firstName" class="lbl">Votre prénom</label>
+    <input id="firstName" type="text" autocomplete="given-name" maxlength="30" placeholder="Votre prénom">
+    <div id="regError" class="error" role="alert"></div>
+    <div class="actions inline"><button id="regBtn" class="primary">J’ai lu ces informations, je m’inscris</button></div>
+  </section>
+
+  <section id="viewQuiz" class="view" hidden>
+    <section class="panel intro">
+      <div class="whoami"><strong id="whoami"></strong><span id="progressText">0 / 36 réponses</span></div>
+      <div class="progress"><span id="progressFill"></span></div>
+      <p><strong>Consigne :</strong> pour chaque paire, choisissez l’intensité de votre préférence. Les trois positions de gauche correspondent à la préférence A, les trois positions de droite à la préférence B. Le point central marque la bascule et n’est pas sélectionnable.</p>
+    </section>
+    <div id="error" class="error" role="alert"></div>
+    <section id="questions"></section>
+    <div class="actions">
+      <button id="resultBtn" class="primary">Envoyer mes réponses</button>
+    </div>
+  </section>
+
+  <section id="viewWait" class="panel view" hidden>
+    <h2>Réponses bien reçues</h2>
+    <p id="waitText">Votre synthèse sera disponible lorsque votre formateur l’autorisera. Vous pouvez laisser cette page ouverte ou y revenir plus tard avec le même téléphone.</p>
+    <div id="waitError" class="error" role="alert"></div>
+    <div class="actions inline">
+      <button id="checkBtn" class="primary">Vérifier si ma synthèse est disponible</button>
+      <button class="secondary wipeBtn">Effacer mes données de ce téléphone</button>
+    </div>
+  </section>
+
+  <section id="viewResult" class="panel results view" hidden>
+    <h2>Votre cartographie</h2>
+    <p id="resultIdentity"></p>
+    <p id="dominance"></p>
+    <div id="scoreGrid" class="score-grid"></div>
+    <div class="radar-wrap"><canvas id="radar" width="700" height="700" role="img" aria-label="Radar des quatre couleurs"></canvas></div>
+    <div class="hist-wrap"><canvas id="histo" width="700" height="420" role="img" aria-label="Histogramme de la part de chaque couleur"></canvas></div>
+    <div class="reading"><strong>Lecture pédagogique</strong><p id="readingText"></p><p>Les scores indiquent une tendance relative. Ils ne constituent pas un diagnostic psychologique.</p></div>
+    <p class="small">Ces données seront supprimées automatiquement du serveur 7 jours après votre inscription. Téléchargez le PDF si vous souhaitez en garder une copie personnelle.</p>
+    <div class="pdf-actions">
+      <button id="pdfBtn" class="primary">Télécharger le rapport PDF</button>
+      <button id="printBtn" class="secondary">Imprimer</button>
+      <button class="secondary wipeBtn">Effacer mes données de ce téléphone</button>
+    </div>
+    <div id="pdfError" class="error" role="alert"></div>
+  </section>
+
+  <section id="viewMessage" class="panel view" hidden>
+    <h2 id="msgTitle"></h2>
+    <p id="msgText"></p>
+    <div class="actions inline"><button id="msgBtn" class="primary" hidden></button></div>
+  </section>
+
+</main>
+<footer>Questionnaire pédagogique de sensibilisation aux préférences comportementales</footer>
+</body>
+</html>

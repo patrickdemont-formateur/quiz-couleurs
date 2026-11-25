@@ -1,0 +1,7 @@
+{
+  "name": "questionnaire-couleurs-v2",
+  "private": true,
+  "description": "Tests de développement uniquement (non nécessaires au déploiement GitHub Pages). npm install puis npm test.",
+  "scripts": { "test": "node tests/test-server.js && node tests/test-parity.js && node tests/test-e2e.js" },
+  "devDependencies": { "jsdom": "^26.0.0" }
+}

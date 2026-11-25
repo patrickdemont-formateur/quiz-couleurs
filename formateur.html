@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Espace formateur – Profil de management par les couleurs</title>
+<link rel="stylesheet" href="css/style.css?v=3.0">
+<script defer src="js/vendor-qrcode.js?v=3.0"></script>
+<script defer src="js/config.js?v=3.0"></script>
+<script defer src="js/core.js?v=3.0"></script>
+<script defer src="js/formateur.js?v=3.0"></script>
+</head>
+<body>
+<header><div class="wrap wide">
+  <h1>Espace formateur</h1>
+  <p>Profil de management par les couleurs – pilotage d’un groupe</p>
+</div></header>
+
+<main class="wrap wide">
+
+  <section id="viewLogin" class="panel view" hidden>
+    <h2>Connexion</h2>
+    <label for="keyInput" class="lbl">Clé formateur</label>
+    <div class="field-row">
+      <input id="keyInput" type="password" autocomplete="current-password" placeholder="Votre clé personnelle">
+      <button id="loginBtn" class="primary">Se connecter</button>
+    </div>
+    <div id="loginError" class="error" role="alert"></div>
+  </section>
+
+  <section id="viewGroups" class="view" hidden>
+    <div id="purgeBanner1"></div>
+    <div class="panel">
+      <div class="topbar">
+        <h2 style="margin:0">Mes groupes</h2>
+        <div class="toolbar">
+          <label><input type="checkbox" id="showArchived"> Afficher les groupes archivés</label>
+          <button id="newGroupBtn" class="primary">Nouveau groupe</button>
+          <button id="logoutBtn" class="secondary">Se déconnecter</button>
+        </div>
+      </div>
+      <div id="groupsError" class="error" role="alert"></div>
+      <div class="table-wrap"><table class="tbl" id="groupsTable">
+        <thead><tr><th>Groupe</th><th>Code</th><th class="num">Inscrits</th><th class="num">Complets</th><th>Statut</th><th></th></tr></thead>
+        <tbody></tbody>
+      </table></div>
+      <p id="groupsEmpty" class="small" hidden>Aucun groupe pour le moment. Créez-en un pour obtenir un QR code d’inscription.</p>
+    </div>
+  </section>
+
+  <section id="viewGroup" class="view" hidden>
+    <div id="purgeBanner2"></div>
+    <div class="topbar">
+      <button id="backBtn" class="secondary">← Mes groupes</button>
+      <div class="toolbar">
+        <label><input type="checkbox" id="maskNames"> Masquer les prénoms (projection)</label>
+        <label><input type="checkbox" id="autoRefresh"> Actualisation automatique (30 s)</label>
+        <button id="refreshBtn" class="secondary">Actualiser</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="grp-head">
+        <div><h2 id="gName"></h2><span id="gTags"></span></div>
+        <div class="toolbar"><button id="toggleRegBtn" class="secondary"></button></div>
+      </div>
+      <div class="grp-grid" style="margin-top:14px">
+        <div class="qr-box">
+          <div class="qr" id="qrSmall" title="Cliquer pour agrandir" tabindex="0" role="button" aria-label="Agrandir le QR code"></div>
+          <div class="code-big" id="gCode"></div>
+          <div class="url-small" id="gUrl"></div>
+          <div class="toolbar" style="justify-content:center;margin-top:10px"><button id="qrBigBtn" class="secondary sm">Agrandir pour projeter</button><button id="copyBtn" class="secondary sm">Copier le lien</button></div>
+        </div>
+        <div>
+          <div class="kpis">
+            <div class="kpi"><strong id="kInscrits">0</strong><span>inscrits</span></div>
+            <div class="kpi"><strong id="kComplets">0</strong><span>questionnaires complets</span></div>
+            <div class="kpi"><strong id="kDebloques">0</strong><span>synthèses débloquées</span></div>
+            <div class="kpi"><strong id="kExpire">–</strong><span>suppression des données le plus tôt</span></div>
+          </div>
+          <div class="sec-title"><h3>Participants</h3>
+            <div class="toolbar"><button id="releaseAllBtn" class="primary sm">Débloquer toutes les synthèses complètes</button><button id="lockAllBtn" class="secondary sm">Verrouiller tout</button></div>
+          </div>
+          <div id="gError" class="error" role="alert"></div>
+          <div class="table-wrap"><table class="tbl" id="pTable">
+            <thead><tr><th>Prénom</th><th>Identifiant</th><th>Avancement</th><th>Synthèse</th><th class="acts">Actions</th></tr></thead>
+            <tbody></tbody>
+          </table></div>
+          <p id="pEmpty" class="small" hidden>Personne ne s’est encore inscrit. Projetez le QR code ci-contre.</p>
+          <p class="small">Cliquez sur une ligne pour voir le profil et les réponses de la personne. Une synthèse n’est visible par le participant que lorsqu’elle est débloquée.</p>
+        </div>
+      </div>
+    </div>
+
+    <details class="panel" id="collective">
+      <summary>Synthèse collective (annexe)</summary>
+      <div id="collBody"></div>
+    </details>
+
+    <div class="panel danger-zone">
+      <h3>Gestion du groupe et des données</h3>
+      <p class="small">Les données individuelles sont supprimées automatiquement 7 jours après l’inscription. L’archivage ne conserve que le nom, le code et la date de création du groupe.</p>
+      <div class="toolbar">
+        <button id="archiveBtn" class="secondary"></button>
+        <button id="purgeGroupBtn" class="danger">Effacer maintenant les données individuelles</button>
+        <button id="deleteGroupBtn" class="danger">Supprimer le groupe</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div id="modalBg" class="modal-bg" hidden><div class="modal" id="modal" role="dialog" aria-modal="true"></div></div>
+<footer>Espace formateur – outil pédagogique, aucune donnée individuelle n’est archivée</footer>
+</body>
+</html>
